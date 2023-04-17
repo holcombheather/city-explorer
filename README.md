@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# City Explorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Author**: Heather Holcomb
+**Version**: 1.0.0 
+<!-- (increment the patch/fix version number if you make more commits past your first submission) -->
 
-## Available Scripts
+## Quick Links
+* [Trello Project Board](https://trello.com/b/aBkEngzn/city-explorer-module-2)
+* [Deployed App on Netlify]()
 
-In the project directory, you can run:
+***
 
-### `npm start`
+## Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+City Explorer solves the problem of navigating unfamiliar cities and finding must-see attractions. It provides users with real-time weather information, movies related to the destination, and restaurant information. Users can enter a location and see its latitude and longitude on a map, making exploring neighborhoods and parks easier. City Explorer makes travel more enjoyable and stress-free.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+***
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To are the steps you need to take to build and run City Explorer on your own machine:
 
-### `npm run build`
+| Step | Description |
+| --- | --- |
+| 1 | Install Node.js: City Explorer is built using Node.js, so the first step is to install it on your machine. You can download and install the latest version from the [official website](https://nodejs.org/en/download/). |
+| 2 | Clone the repository: The City Explorer code is hosted on a Git repository. You'll need to clone it to your local machine using a Git client such as Git Bash or GitHub Desktop. |
+| 3 | Install dependencies: City Explorer relies on several third-party dependencies such as Express, Request, and EJS. You can install them using Node Package Manager (NPM) by navigating to the project's root directory and running the command `npm install`. |
+| 4 | Obtain API keys: City Explorer uses several APIs such as OpenWeatherMap and The Movie Database. You'll need to obtain API keys from these services and store them securely in a `.env` file. |
+| 5 | Start the server: Once you have installed all the dependencies and obtained the necessary API keys, you can start the server by running the command `npm start` in the terminal. |
+| 6 | Access the app: City Explorer should now be running on your local machine. You can access it by opening a web browser and navigating to `http://localhost:3000/`. |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+These steps provide a high-level overview of the process for building and running City Explorer on your own machine. However, it's important to note that there may be additional configuration steps and dependencies required depending on your specific machine and development environment.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+***
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Architecture
 
-### `npm run eject`
+* City Explorer is a web application designed to provide users with information about a city they're interested in exploring.
+    * The back-end is built using Node.js, which handles server-side logic and communicates with third-party APIs.
+        * [Geocoding API](https://locationiq.com/)
+        * [Weather Bit API](https://www.weatherbit.io/)
+        * [Yelp API](https://www.yelp.com/developers/documentation/v3/business_search)
+        * [The Movie DB API](https://developers.themoviedb.org/3/getting-started/introduction)
+    * The front-end is built using React, HTML, CSS, and JavaScript, which structure and style the content and add interactivity.
+    * The .env library is used to store sensitive information securely.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Web request-response cycle & Data Flow
+* Lab 06: 
+![lab06_WRRC](public/assets/lab06_WRRC.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+***
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Change Log
 
-## Learn More
+| Date and Time (in PST) | Brief summary of the changes made |
+| --- | --- |
+| 04-07-2023 2:15pm | Verified creation of react-app and linked to GitHub repo |
+| [DATE AND TIME] | [BRIEF SUMMARY OF CHANGES MADE] |
+| [DATE AND TIME] | [BRIEF SUMMARY OF CHANGES MADE] |
+| [DATE AND TIME] | [BRIEF SUMMARY OF CHANGES MADE] |
+| [DATE AND TIME] | [BRIEF SUMMARY OF CHANGES MADE] |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
-### Code Splitting
+01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+***
 
-### Analyzing the Bundle Size
+## Credit and Collaborations
+<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Thanks to Donna Ada and Isabel Sopha for collaborating on WRRC for Lab 06. 
 
-### Making a Progressive Web App
+***
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Time Estimates
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
