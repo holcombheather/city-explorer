@@ -57,7 +57,7 @@ These steps provide a high-level overview of the process for building and runnin
 | Date and Time (in PST) | Brief summary of the changes made |
 | --- | --- |
 | 04-07-2023 2:15pm | Verified creation of react-app and linked to GitHub repo |
-| [DATE AND TIME] | [BRIEF SUMMARY OF CHANGES MADE] |
+| 04-07-2023 2:15pm | Updated README with required assignment info |
 | [DATE AND TIME] | [BRIEF SUMMARY OF CHANGES MADE] |
 | [DATE AND TIME] | [BRIEF SUMMARY OF CHANGES MADE] |
 | [DATE AND TIME] | [BRIEF SUMMARY OF CHANGES MADE] |
