@@ -59,6 +59,8 @@ These steps provide a high-level overview of the process for building and runnin
 | 04-07-2023 2:15pm | Verified creation of react-app and linked to GitHub repo |
 | 04-07-2023 2:59pm | Updated README with required assignment info |
 | 04-07-2023 3:21pm | Verified deployment of Netlify app |
+| 04-07-2023 3:42pm | Completed set up of repo and API keys |
+| 04-07-2023 3:42pm | Verified API query for city data |
 | [DATE AND TIME] | [BRIEF SUMMARY OF CHANGES MADE] |
 | [DATE AND TIME] | [BRIEF SUMMARY OF CHANGES MADE] |
 
