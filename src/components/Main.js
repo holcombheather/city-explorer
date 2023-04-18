@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 // import Alert from 'react-bootstrap/Alert';
-import { CardImg } from 'react-bootstrap';
+import { CardImg, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 class Main extends Component {
     constructor(props) {
@@ -40,7 +40,6 @@ class Main extends Component {
 
             let mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_API_KEY}&center=${cityData.lat},${cityData.lon}&zoom=13`
 
-
             // Take return from axios and set that to state
             this.setState({
                 cityData: cityData,
@@ -62,25 +61,34 @@ class Main extends Component {
         return (
             <>
             <div>
-                                <Form onSubmit={this.getCityData}>
-                    <Form.Group>
-                        <Form.Label>Location</Form.Label>
-                        <Form.Control type="text" onInput={this.handleCityInput} />
-                        <Form.Text className="text-muted">Input a city for valuable information!</Form.Text>
-                    </Form.Group>
+                <Form onSubmit={this.getCityData} style={{padding: '20px'}}>
+                        <Form.Group>
+                            <Row>
+                                <Form.Label column="lg" lg={1}>Location</Form.Label>
+                            <Col>
+                                <Form.Control type="text" onInput={this.handleCityInput} />
+                                <Form.Text className="text-muted">Input a city for valuable information!</Form.Text>
+                            </Col>
+                            </Row>
+                                
+
+                        </Form.Group>
                     <Button variant="primary" type="submit">Explore!</Button>
                 </Form>
             </div>
-            <div>
-                        <Card>
+            <div className="row justify-content-center align-items-center">
+                <Card border="primary" style={{width: '80%', padding: '20px'}}>
                     <Card.Body>
                         {
                         this.state.error 
                         ? <Card.Text>{this.state.errorMsg}</Card.Text>
                         : <div>
-                            <p>City: {this.state.cityData.display_name}</p>
-                            <p>Longitude: {this.state.cityData.lon}</p>
-                            <p>Latitude: {this.state.cityData.lat}</p>
+                            <Card.Header as="h5" style={{marginTop: '10px'}}>{this.state.cityData.display_name}</Card.Header>
+                            <ListGroup>
+                                <ListGroupItem variant='secondary'>City: {this.state.cityData.display_name}</ListGroupItem>
+                                <ListGroupItem variant='light'>Longitude: {this.state.cityData.lon}</ListGroupItem>
+                                <ListGroupItem variant='light'>Latitude: {this.state.cityData.lat}</ListGroupItem>
+                            </ListGroup>
                             <CardImg variant="bottom" src={this.state.mapUrl}></CardImg>
                         </div>}
                     </Card.Body>
