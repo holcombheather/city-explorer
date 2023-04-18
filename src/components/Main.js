@@ -73,7 +73,14 @@ class Main extends Component {
                     {/* //TO DO: Component to render results of display_name, latitude, longitude
                     //TO DO: Display error message */}
                 <Card>
-                    <p>{this.state.cityData.display_name}</p>
+                    <Card.Text>
+                        <ul>
+                            <li>City: {this.state.cityData.display_name}</li>
+                            <li>Longitude: {this.state.cityData.lon}</li>
+                            <li>Latitude: {this.state.cityData.lat}</li>
+                        </ul>
+                        
+                    </Card.Text>
                 </Card>
             </>
         )
