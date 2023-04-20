@@ -1,10 +1,10 @@
 import { Component } from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import Card from 'react-bootstrap/Card';
-// import Alert from 'react-bootstrap/Alert';
-import { CardImg, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Image, Row, Col, Container } from 'react-bootstrap';
+// import CityWeather from './Weather';
+import SearchForm from './SearchForm';
+import ErrorAlert from './ErrorAlert';
+import CityData from './CityData';
 
 class Main extends Component {
     constructor(props) {
@@ -12,8 +12,11 @@ class Main extends Component {
         this.state = {
             city: '',
             cityData: [],
+            mapUrl: '',
             error: false,
-            errorMsg: ''
+            errorMsg: '',
+            forecasts: [],
+            showWeather: false,
         }
     }
 
@@ -24,30 +27,36 @@ class Main extends Component {
         })
     }
 
-    // Method that queries LocationIQ for long/lat
     getCityData = async (ev) => {
         ev.preventDefault();
 
         try {
-            // Define URL to pass to axios using the city in state
             let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATION_IQ_API_KEY}&q=${this.state.city}&format=json`
             
-            // Call to the location IQ API using axios
-            let response = await axios.get(url)
+            let response = await axios.get(url);
             let cityData = response.data[0];
-
-            console.log(cityData);
 
             let mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_API_KEY}&center=${cityData.lat},${cityData.lon}&zoom=13`
 
-            // Take return from axios and set that to state
             this.setState({
                 cityData: cityData,
                 mapUrl: mapUrl,
                 error: false
-            })
+            });
+            console.log(cityData);
 
-        // Set state with the error boolean and error message
+            let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?&searchQuery=${this.state.city}`;
+            // let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.cityData.lat}&lon=${this.state.cityData.lon}&searchQuery=${this.state.city}`;
+
+            let weatherData = await axios.get(weatherUrl)
+
+            this.setState({ 
+                forecasts: weatherData.data,
+                showWeather: true,
+                error: false,
+            });
+            console.log('Weather: ' + this.state.forecasts);
+
         } catch(error){
         this.setState({
             error: true,
@@ -55,47 +64,29 @@ class Main extends Component {
         })
         }
 
-    }
+    };
 
     render() {
         return (
-            <>
-            <div>
-                <Form onSubmit={this.getCityData} style={{padding: '20px'}}>
-                        <Form.Group>
-                            <Row>
-                                <Form.Label column="lg" lg={1}>Location</Form.Label>
-                            <Col>
-                                <Form.Control type="text" onInput={this.handleCityInput} />
-                                <Form.Text className="text-muted">Input a city for valuable information!</Form.Text>
-                            </Col>
-                            </Row>
-                                
-
-                        </Form.Group>
-                    <Button variant="primary" type="submit">Explore!</Button>
-                </Form>
-            </div>
-            <div className="row justify-content-center align-items-center">
-                <Card border="primary" style={{width: '80%', padding: '20px'}}>
-                    <Card.Body>
-                        {
-                        this.state.error 
-                        ? <Card.Text>{this.state.errorMsg}</Card.Text>
-                        : <div>
-                            <Card.Header as="h5" style={{marginTop: '10px'}}>{this.state.cityData.display_name}</Card.Header>
-                            <ListGroup>
-                                <ListGroupItem variant='secondary'>City: {this.state.cityData.display_name}</ListGroupItem>
-                                <ListGroupItem variant='light'>Longitude: {this.state.cityData.lon}</ListGroupItem>
-                                <ListGroupItem variant='light'>Latitude: {this.state.cityData.lat}</ListGroupItem>
-                            </ListGroup>
-                            <CardImg variant="bottom" src={this.state.mapUrl}></CardImg>
-                        </div>}
-                    </Card.Body>
-                </Card>        
-            </div>
-
-            </>
+            <Container>
+                <Row>
+                    <Col>
+                        <SearchForm onFormChange={this.getCityData} />
+                    </Col>
+                </Row>
+                    <Col>
+                        {this.state.error ? (
+                            <ErrorAlert />
+                        ) : (
+                            <CityData />
+                        )}
+                    </Col>
+                <Row>
+                    <Col>
+                        <Image src={this.state.mapUrl}/>
+                    </Col>
+                </Row>
+            </Container>
         )
 
     }
