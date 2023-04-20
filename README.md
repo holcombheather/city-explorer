@@ -1,13 +1,12 @@
 # City Explorer
 
 **Author**: Heather Holcomb
-**Version**: 1.2.1 
+**Version**: 1.0.0 
 <!-- (increment the patch/fix version number if you make more commits past your first submission) -->
 
 ## Quick Links
 * [Trello Project Board](https://trello.com/b/aBkEngzn/city-explorer-module-2)
 * [Deployed App on Netlify](https://city-explorer-heatherholcomb.netlify.app/)
-* [Deployed Server on Render](https://city-explorer-api-npnt.onrender.com)
 
 ***
 
@@ -48,8 +47,7 @@ These steps provide a high-level overview of the process for building and runnin
 ### Web request-response cycle & Data Flow
 * Lab 06: 
 ![lab06_WRRC](public/assets/lab06_WRRC.png)
-* Lab 07: 
-![lab07_WRRC](public/assets/lab07_WRRC.png)
+
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
 
 ***
@@ -63,7 +61,6 @@ These steps provide a high-level overview of the process for building and runnin
 | 04-07-2023 3:21pm | Verified deployment of Netlify app |
 | 04-07-2023 3:42pm | Completed set up of repo and API keys |
 | 04-07-2023 3:42pm | Verified API query for city data |
-| 04-18-2023 4:14pm | Deployed live server |
 | [DATE AND TIME] | [BRIEF SUMMARY OF CHANGES MADE] |
 | [DATE AND TIME] | [BRIEF SUMMARY OF CHANGES MADE] |
 
@@ -82,14 +79,6 @@ Thanks to Donna Ada and Isabel Sopha for collaborating on WRRC for Lab 06.
 ***
 
 ## Time Estimates
-
-
-| Lab | Number & Name of Feature | Estimate of Time Needed to Complete | Start Time | Finish Time | Actual Time Needed to Complete |
-| --- | --- | --- | --- | --- | --- |
-| 06 | 1. Set Up your React repo & API keys | 30 min | 2:08p | 3:42p | 1 hr 34 min |
-| 06 | 2. Locations | 1 hour | 3:42p | 5:22p | 1 hr 40m |
-| 06 | 3. Map | 45 min | 5:22p | 9:37p | 1 hr 30m* |
-| 06 | 4. Errors | 45 min | 9:37p | 9:53p | 1 hr 40m** |
 
 
 
