@@ -1,17 +1,18 @@
 import { Component } from 'react';
 import axios from 'axios';
-import { Image, Row, Col, Container } from 'react-bootstrap';
+import { Image, Row, Col, Container, Form, Button } from 'react-bootstrap';
 // import CityWeather from './Weather';
 import SearchForm from './SearchForm';
 import ErrorAlert from './ErrorAlert';
 import CityData from './CityData';
+// import Weather from './Weather';
 
 class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
             city: '',
-            cityData: [],
+            cityData: {},
             mapUrl: '',
             error: false,
             errorMsg: '',
@@ -36,26 +37,27 @@ class Main extends Component {
             let response = await axios.get(url);
             let cityData = response.data[0];
 
+            console.log(cityData);
+
             let mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_API_KEY}&center=${cityData.lat},${cityData.lon}&zoom=13`
 
             this.setState({
                 cityData: cityData,
                 mapUrl: mapUrl,
                 error: false
-            });
-            console.log(cityData);
+            })
 
-            let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?&searchQuery=${this.state.city}`;
-            // let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.cityData.lat}&lon=${this.state.cityData.lon}&searchQuery=${this.state.city}`;
+            // let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?&searchQuery=${this.state.cityData.display_name}`;
+            // // let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.cityData.lat}&lon=${this.state.cityData.lon}&searchQuery=${this.state.city}`;
 
-            let weatherData = await axios.get(weatherUrl)
+            // let weatherData = await axios.get(weatherUrl)
 
-            this.setState({ 
-                forecasts: weatherData.data,
-                showWeather: true,
-                error: false,
-            });
-            console.log('Weather: ' + this.state.forecasts);
+            // this.setState({ 
+            //     forecasts: weatherData.data,
+            //     showWeather: true,
+            //     error: false,
+            // });
+            // console.log('Weather: ' + this.state.forecasts);
 
         } catch(error){
         this.setState({
@@ -68,17 +70,35 @@ class Main extends Component {
 
     render() {
         return (
+            <>            
             <Container>
                 <Row>
                     <Col>
-                        <SearchForm onFormChange={this.getCityData} />
+                        {/* <Form onSubmit={this.getCityData} style={{padding: '20px'}}>
+                        <Form.Group>
+                            <Row>
+                                <Form.Label column="lg" lg={1}>Location</Form.Label>
+                            <Col>
+                                <Form.Control type="text" onInput={this.handleCityInput} />
+                                <Form.Text className="text-muted">Input a city for valuable information!</Form.Text>
+                            </Col>
+                            </Row>
+                                
+
+                        </Form.Group>
+                    <Button variant="primary" type="submit">Explore!</Button>
+                </Form> */}
+                        <SearchForm onSubmit={this.getCityData} onInput={this.handleCityInput} />
                     </Col>
                 </Row>
                     <Col>
                         {this.state.error ? (
-                            <ErrorAlert />
+                            <ErrorAlert errorMessage={this.state.errorMsg}/>
                         ) : (
-                            <CityData />
+                            <>                            
+                            <CityData cityData={this.state.cityData} />
+                            </>
+
                         )}
                     </Col>
                 <Row>
@@ -86,9 +106,14 @@ class Main extends Component {
                         <Image src={this.state.mapUrl}/>
                     </Col>
                 </Row>
+                <Row>
+                    <Col>
+                        {/* <Weather showWeather={this.state.forecasts}/> */}
+                    </Col>
+                </Row>
             </Container>
+            </>
         )
-
     }
 }
 

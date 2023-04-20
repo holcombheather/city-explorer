@@ -5,7 +5,9 @@ import { Alert } from 'react-bootstrap';
 class ErrorAlert extends Component {
     render() {
         return (
-            <Alert>{this.state.errorMsg}
+            <Alert variant="info">
+                <Alert.Heading>Unable to Get City Data</Alert.Heading>
+                <p>{this.props.errorMessage}</p>
             </Alert>
         )
     }
