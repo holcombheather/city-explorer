@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import axios from 'axios';
-import { Image, Row, Col, Container, Form, Button } from 'react-bootstrap';
+import { Image, Row, Col, Container } from 'react-bootstrap';
 import SearchForm from './SearchForm';
 import ErrorAlert from './ErrorAlert';
 import CityData from './CityData';

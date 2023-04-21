@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Col, Card, CardGroup, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Col, Card, CardGroup } from 'react-bootstrap';
 
 class Weather extends Component {
     render(){
