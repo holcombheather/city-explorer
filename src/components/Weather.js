@@ -4,7 +4,6 @@ import { Col, Card, CardGroup } from 'react-bootstrap';
 class Weather extends Component {
     render(){
         console.log('Weather props: ', this.props.showWeather);
-        console.log('Weather props: ', this.props.forecasts);
         
         let forecastCards;
         if (this.props.forecasts) {
@@ -13,7 +12,6 @@ class Weather extends Component {
                     <Card>
                         <Card.Header>{forecast.date}</Card.Header>
                         <Card.Body>
-                            <Card.Text>Looks like:</Card.Text>
                             <Card.Text>{forecast.description}</Card.Text>
                         </Card.Body>
                     </Card>
