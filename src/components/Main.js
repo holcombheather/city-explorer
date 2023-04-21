@@ -1,11 +1,10 @@
 import { Component } from 'react';
 import axios from 'axios';
-import { Image, Row, Col, Container, Form, Button } from 'react-bootstrap';
-// import CityWeather from './Weather';
+import { Image, Row, Col, Container } from 'react-bootstrap';
 import SearchForm from './SearchForm';
 import ErrorAlert from './ErrorAlert';
 import CityData from './CityData';
-// import Weather from './Weather';
+import Weather from './Weather';
 
 class Main extends Component {
     constructor(props) {
@@ -34,30 +33,22 @@ class Main extends Component {
         try {
             let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATION_IQ_API_KEY}&q=${this.state.city}&format=json`
             
-            let response = await axios.get(url);
-            let cityData = response.data[0];
+            // let response = await axios.get(url);
+            // let cityData = response.data[0];
+            let cityData = await axios.get(url);
+
+            
 
             console.log(cityData);
 
-            let mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_API_KEY}&center=${cityData.lat},${cityData.lon}&zoom=13`
+            let mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_API_KEY}&center=${cityData.data[0].lat},${cityData.data[0].lon}&zoom=13`
 
             this.setState({
-                cityData: cityData,
+                cityData: cityData.data[0],
                 mapUrl: mapUrl,
                 error: false
             })
-
-            // let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?&searchQuery=${this.state.cityData.display_name}`;
-            // // let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.cityData.lat}&lon=${this.state.cityData.lon}&searchQuery=${this.state.city}`;
-
-            // let weatherData = await axios.get(weatherUrl)
-
-            // this.setState({ 
-            //     forecasts: weatherData.data,
-            //     showWeather: true,
-            //     error: false,
-            // });
-            // console.log('Weather: ' + this.state.forecasts);
+            this.getWeatherData(cityData.data[0].lat,cityData.data[0].lon);
 
         } catch(error){
         this.setState({
@@ -66,7 +57,31 @@ class Main extends Component {
         })
         }
 
-    };
+    }
+
+    getWeatherData = async (lat, lon) => {
+        try {
+            // let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.city}`;
+            let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.lat}&lon=${this.state.lon}&searchQuery=${this.state.city}`;
+
+            // let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`;
+            // let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.cityData.lat}&lon=${this.state.cityData.lon}&searchQuery=${this.state.city}`;
+            let weatherData = await axios.get(weatherUrl)
+
+            this.setState({ 
+                forecasts: weatherData.data,
+                showWeather: true,
+            })            
+        } catch (error) {
+            console.log(error.message)
+
+            this.setState({
+                errorMsg: error.message,
+                showWeather: false,
+            })
+        }
+
+        }
 
     render() {
         return (
@@ -74,20 +89,6 @@ class Main extends Component {
             <Container>
                 <Row>
                     <Col>
-                        {/* <Form onSubmit={this.getCityData} style={{padding: '20px'}}>
-                        <Form.Group>
-                            <Row>
-                                <Form.Label column="lg" lg={1}>Location</Form.Label>
-                            <Col>
-                                <Form.Control type="text" onInput={this.handleCityInput} />
-                                <Form.Text className="text-muted">Input a city for valuable information!</Form.Text>
-                            </Col>
-                            </Row>
-                                
-
-                        </Form.Group>
-                    <Button variant="primary" type="submit">Explore!</Button>
-                </Form> */}
                         <SearchForm onSubmit={this.getCityData} onInput={this.handleCityInput} />
                     </Col>
                 </Row>
@@ -108,7 +109,7 @@ class Main extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        {/* <Weather showWeather={this.state.forecasts}/> */}
+                        <Weather showWeather={this.state.forecasts} forecasts={this.state.forecasts}/>
                     </Col>
                 </Row>
             </Container>

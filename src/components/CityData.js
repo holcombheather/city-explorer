@@ -6,7 +6,7 @@ class CityData extends Component {
         console.log('Search form props: ', this.props.cityData);
         return (
             <>            
-            <Card >            
+            <Card>            
                 <Card.Header as="h5" style={{marginTop: '10px'}}>{this.props.cityData.display_name}</Card.Header>
                 <Card.Body>
                     <ListGroup>
