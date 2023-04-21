@@ -17,6 +17,8 @@ class Main extends Component {
             errorMsg: '',
             forecasts: [],
             showWeather: false,
+            lat: '',
+            lon: ''
         }
     }
 
@@ -39,16 +41,21 @@ class Main extends Component {
 
             
 
-            console.log(cityData);
+            console.log("HERE: ",cityData.data[0].lon);
 
             let mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_API_KEY}&center=${cityData.data[0].lat},${cityData.data[0].lon}&zoom=13`
-
+            console.log("Map: ",mapUrl);
+            this.getWeatherData(cityData.data[0].lat,cityData.data[0].lon);
+            
             this.setState({
                 cityData: cityData.data[0],
                 mapUrl: mapUrl,
-                error: false
+                error: false,
+                lat: cityData.data[0].lat,
+                lon: cityData.data[0].lon,
             })
-            this.getWeatherData(cityData.data[0].lat,cityData.data[0].lon);
+            console.log("1HERE: ",this.state.lat);
+
 
         } catch(error){
         this.setState({
@@ -62,7 +69,7 @@ class Main extends Component {
     getWeatherData = async (lat, lon) => {
         try {
             // let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.city}`;
-            let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.lat}&lon=${this.state.lon}&searchQuery=${this.state.city}`;
+            let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}&searchQuery=${this.state.city}`;
 
             // let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`;
             // let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.cityData.lat}&lon=${this.state.cityData.lon}&searchQuery=${this.state.city}`;
