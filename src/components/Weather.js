@@ -1,27 +1,39 @@
-// import { Component } from "react";
-// import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Component } from "react";
+import { Col, Card, CardGroup, ListGroup, ListGroupItem } from 'react-bootstrap';
 
-// class Weather extends Component {
-//     render(){
-//         return (
-//             <>            
-//             <Card >            
-//                 <Card.Header as="h5" style={{marginTop: '10px'}}>{this.props.cityData.forecasts}</Card.Header>
-//                 <Card.Body>
-//                     <ListGroup>
-//                         <ListGroupItem variant='secondary'>City: {this.props.cityData.display_name}</ListGroupItem>
-//                         <ListGroupItem variant='light'>Longitude: {this.props.cityData.lon}</ListGroupItem>
-//                         <ListGroupItem variant='light'>Latitude: {this.props.cityData.lat}</ListGroupItem>
-//                         <ListGroupItem variant='light'>Weather: {this.props.cityData.forecasts}</ListGroupItem>
-//                     </ListGroup>
-//                 </Card.Body>
-//             </Card>
-//             </>
-//         )
-//     }
-// }
+class Weather extends Component {
+    render(){
+        console.log('Weather props: ', this.props.showWeather);
+        console.log('Weather props: ', this.props.forecasts);
+        
+        let forecastCards;
+        if (this.props.forecasts) {
+            forecastCards = this.props.forecasts.map((forecast) => {
+                return <Col xs={6} md={3}>
+                    <Card>
+                        <Card.Header>{forecast.date}</Card.Header>
+                        <Card.Body>{forecast.description}</Card.Body>
+                    </Card>
+                </Col>
+            });
+        }
 
-// export default Weather;
+        return (
+            <>            
+            <Card >            
+                <Card.Header as="h5" style={{marginTop: '10px'}}>Weather Forecast:</Card.Header>
+                <Card.Body>
+                    <CardGroup>
+                       {forecastCards}
+                    </CardGroup>
+                </Card.Body>
+            </Card>
+            </>
+        )
+    }
+}
+
+export default Weather;
    
    
    // handleWeather = async (lat, lon) => {
