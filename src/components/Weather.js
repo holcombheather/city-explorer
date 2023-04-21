@@ -12,7 +12,10 @@ class Weather extends Component {
                 return <Col xs={6} md={3}>
                     <Card>
                         <Card.Header>{forecast.date}</Card.Header>
-                        <Card.Body>{forecast.description}</Card.Body>
+                        <Card.Body>
+                            <Card.Text>Looks like:</Card.Text>
+                            <Card.Text>{forecast.description}</Card.Text>
+                        </Card.Body>
                     </Card>
                 </Col>
             });
